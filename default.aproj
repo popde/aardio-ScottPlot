@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project ver="10" name="ScottPlot_Demo" libEmbed="true" icon="..." ui="win" output="ScottPlot_Demo.exe" CompanyName="单位名称" FileDescription="ScottPlot_Demo" LegalCopyright="Copyright (C) 作者 2022" ProductName="ScottPlot_Demo" InternalName="ScottPlot_Demo" FileVersion="0.0.0.02" ProductVersion="0.0.0.02" publishDir="/dist/" dstrip="false" local="false" ignored="false">
+	<file name="main.aardio" path="main.aardio" comment="main.aardio"/>
+	<folder name="资源文件" path="res" embed="true"/>
+	<folder name="窗体文件" path="dlg" comment="目录" embed="true" local="false" ignored="false">
+		<file name="demo2.aardio" path="dlg\demo2.aardio" comment="dlg\demo2.aardio"/>
+		<file name="demo1.aardio" path="dlg\demo1.aardio" comment="dlg\demo1.aardio"/>
+		<file name="demo3.aardio" path="dlg\demo3.aardio" comment="dlg\demo3.aardio"/>
+	</folder>
+</project>
