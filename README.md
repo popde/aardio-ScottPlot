@@ -5,4 +5,5 @@ aardio调用c# ScottPlot 控件显示波形图,ScottPlot是用c# .net编写的�
 ![image](https://github.com/popde/aardio-ScottPlot/blob/main/pic2.png)
 aardio v34.36版本以上对dotnet库进行了重大更新, 现在可以非常简单的调用c#的程序集.
 本示例首发: https://www.htmlayout.cn/t/21289
-如有问题, 请到上面网址里反馈, github上的不多.
+如有问题, 请到上面网址里反馈, github上的不多.....
+aardio IDE 下载:https://www.aardio.com/
