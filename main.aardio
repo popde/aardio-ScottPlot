@@ -16,25 +16,26 @@ custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=485;bg
 )
 /*}}*/
 
+import System.ValueTuple;
 import ScottPlot;
 var Chart = ScottPlot.FormsPlot();
 //绑定界面
 dotNet.setParent(Chart,mainForm.custom);
 var ys = ScottPlot.DataGen.NoisyLinear(null, 100,1,30, 20);
 var xs = ScottPlot.DataGen.Consecutive(#ys);
-
+ 
 var x1 = xs[1];
 var x2 = xs[#xs];
-var arr = ValueTuple.CreateDoubleTupleValue(x1,x2);
-
+ 
+var arr = System.ValueTuple.Create(dotNet.double(x1),dotNet.double(x2));
 // use the linear regression fitter to fit these data
 var model = ScottPlot.Statistics.LinearRegressionLine(xs, ys);
-
+ 
 // plot the original data and add the regression line
 Chart.Plot.Title('Linear Regression\n' ++ "Y = "++model.slope++"x + "++model.offset++ " (R² = "++model.rSquared++")");
 Chart.Plot.AddScatter(xs, ys, null, 0);
 Chart.Plot.AddLine(model.slope, model.offset, arr,null, 2);
-
+ 
 Chart.Refresh(true,false);
 
 mainForm.button.oncommand = function(id,event){
