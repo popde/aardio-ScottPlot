@@ -1,0 +1,32 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+ 
+var vArr = table.array(20,0);
+var YArr = table.array(20,0);
+for(i=1;20;1){
+    vArr[i]=math.random()*100;
+    YArr[i]=i;
+}
+ 
+var bar = Chart.Plot.AddBar(vArr, YArr);
+bar.BarWidth = 1;
+ 
+// customize the plot style
+Chart.Plot.YAxis.Label("Count (#)");
+Chart.Plot.XAxis.Label("Height (cm)");
+Chart.Plot.SetAxisLimits(null,null,0,null,0,0);
+ 
+Chart.Refresh(true,false);
+
+mainForm.show();
+return win.loopMessage();

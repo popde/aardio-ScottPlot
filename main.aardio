@@ -2,9 +2,16 @@ import win.ui;
 /*DSG{{*/
 mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
 mainForm.add(
-button={cls="button";text="demo1";left=4;top=489;right=104;bottom=525;db=1;dl=1;z=2};
-button2={cls="button";text="demo2";left=118;top=489;right=218;bottom=525;db=1;dl=1;z=3};
-button3={cls="button";text="demo3";left=235;top=489;right=335;bottom=525;db=1;dl=1;z=4};
+button={cls="button";text="demo1";left=4;top=489;right=67;bottom=525;db=1;dl=1;z=2};
+button10={cls="button";text="demo10";left=634;top=489;right=697;bottom=525;db=1;dr=1;z=11};
+button2={cls="button";text="demo2";left=74;top=489;right=137;bottom=525;db=1;dl=1;z=3};
+button3={cls="button";text="demo3";left=144;top=489;right=207;bottom=525;db=1;dl=1;z=4};
+button4={cls="button";text="demo4";left=214;top=489;right=277;bottom=525;db=1;dl=1;z=5};
+button5={cls="button";text="demo5";left=284;top=489;right=347;bottom=525;db=1;dl=1;z=6};
+button6={cls="button";text="demo6";left=354;top=489;right=417;bottom=525;db=1;dl=1;dr=1;z=7};
+button7={cls="button";text="demo7";left=424;top=489;right=487;bottom=525;db=1;dr=1;z=8};
+button8={cls="button";text="demo8";left=494;top=489;right=557;bottom=525;db=1;dr=1;z=9};
+button9={cls="button";text="demo9";left=564;top=489;right=627;bottom=525;db=1;dr=1;z=10};
 custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=485;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
 )
 /*}}*/
@@ -13,43 +20,22 @@ import ScottPlot;
 var Chart = ScottPlot.FormsPlot();
 //绑定界面
 dotNet.setParent(Chart,mainForm.custom);
+var ys = ScottPlot.DataGen.NoisyLinear(null, 100,1,30, 20);
+var xs = ScottPlot.DataGen.Consecutive(#ys);
 
- // plot one set of data using the primary Y axis
-var sigSmall = Chart.Plot.AddSignal(ScottPlot.DataGen.Sin(51, 1));
-sigSmall.YAxisIndex = 0;
-Chart.Plot.YAxis.Label("Primary Axis");
-Chart.Plot.YAxis.Color(sigSmall.Color);
- 
-// plot another set of data using an additional axis
-var sigBig = Chart.Plot.AddSignal(ScottPlot.DataGen.Cos(51,1,0,100));
-var yAxis3 = Chart.Plot.AddAxis(0/*Left*/, 2);
-sigBig.YAxisIndex = 2;
-yAxis3.Label("Additional Axis");
-yAxis3.Color(sigBig.Color);
+var x1 = xs[1];
+var x2 = xs[#xs];
+var arr = ValueTuple.CreateDoubleTupleValue(x1,x2);
 
-var Crosshair = Chart.Plot.AddCrosshair(15.0, 0.25);
-Crosshair.VerticalLine.IsVisible = false;
-Crosshair.HorizontalLine.IsVisible = false;
+// use the linear regression fitter to fit these data
+var model = ScottPlot.Statistics.LinearRegressionLine(xs, ys);
 
-Chart.Refresh(true);
+// plot the original data and add the regression line
+Chart.Plot.Title('Linear Regression\n' ++ "Y = "++model.slope++"x + "++model.offset++ " (R² = "++model.rSquared++")");
+Chart.Plot.AddScatter(xs, ys, null, 0);
+Chart.Plot.AddLine(model.slope, model.offset, arr,null, 2);
 
-Chart.MouseEnter = function(e,r){
-    Crosshair.VerticalLine.IsVisible = true;
-    Crosshair.HorizontalLine.IsVisible = true
-    Chart.Refresh(false,false);
-}
-Chart.MouseLeave = function(e,r){
-    Crosshair.VerticalLine.IsVisible = false;
-    Crosshair.HorizontalLine.IsVisible = false;
-    Chart.Refresh(false,false);
-}
-  
-Chart.MouseMove = function(){
-    var mouseCoordinates = Chart.GetMouseCoordinates(0,0);
-    Crosshair.X = mouseCoordinates.Item1;
-    Crosshair.Y = mouseCoordinates.Item2;
-    Chart.Refresh(false,true);
-}
+Chart.Refresh(true,false);
 
 mainForm.button.oncommand = function(id,event){
 	
@@ -70,6 +56,41 @@ mainForm.button3.oncommand = function(id,event){
 var frmChild = mainForm.loadForm("\dlg\demo3.aardio");
 frmChild.show();
 
+}
+
+mainForm.button4.oncommand = function(id,event){
+	var frmChild = mainForm.loadForm("\dlg\demo4.aardio");
+	frmChild.show();
+}
+
+mainForm.button5.oncommand = function(id,event){
+	var frmChild = mainForm.loadForm("\dlg\demo5.aardio");
+	frmChild.show();
+}
+
+mainForm.button6.oncommand = function(id,event){
+	var frmChild = mainForm.loadForm("\dlg\demo6.aardio");
+	frmChild.show();
+}
+
+mainForm.button7.oncommand = function(id,event){
+	var frmChild = mainForm.loadForm("\dlg\demo7.aardio");
+	frmChild.show();
+}
+
+mainForm.button8.oncommand = function(id,event){
+	var frmChild = mainForm.loadForm("\dlg\demo8.aardio");
+	frmChild.show();
+}
+
+mainForm.button9.oncommand = function(id,event){
+	var frmChild = mainForm.loadForm("\dlg\demo9.aardio");
+	frmChild.show();
+}
+
+mainForm.button10.oncommand = function(id,event){
+	var frmChild = mainForm.loadForm("\dlg\demo10.aardio");
+	frmChild.show();
 }
 
 mainForm.show();

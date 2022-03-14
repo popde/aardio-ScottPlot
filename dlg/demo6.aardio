@@ -1,0 +1,48 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import System.Drawing;
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+ 
+var vArr = ScottPlot.DataGen.RandomNormal(0, 1234, 178.4, 7.6);
+
+var Histogram = ScottPlot.Statistics.Common.Histogram(vArr, 140, 220, 1, true);
+var probabilities,binEdges = Histogram.Item1, Histogram.Item2;
+var YArr = {};
+
+for(i=1;#probabilities;1){
+    YArr[i]=139+i;
+}
+        
+var bar = Chart.Plot.AddBar(probabilities, YArr);
+bar.BarWidth = 1;
+bar.FillColor = System.Drawing.Color.LightGreen;
+bar.BorderColor = System.Drawing.Color.MediumBlue;
+//bar.HatchStyle = ScottPlot.Drawing.HatchStyle.StripedUpwardDiagonal;
+//bar.ShowValuesAboveBars = true;
+var densities = ScottPlot.Statistics.Common.ProbabilityDensity(vArr, binEdges);
+Chart.Plot.AddScatterLines(
+    binEdges,
+    densities,
+    System.Drawing.Color.Black,
+    2,
+    ScottPlot.LineStyle.Dash);
+
+// customize the plot style
+Chart.Plot.Title("Adult Male Height");
+Chart.Plot.YAxis.Label("Probability");
+Chart.Plot.XAxis.Label("Height (cm)");
+Chart.Plot.SetAxisLimits(null,null,0,null,0,0);
+ 
+Chart.Refresh(true,false);
+
+mainForm.show();
+return win.loopMessage();

@@ -6,6 +6,7 @@ custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bg
 )
 /*}}*/
 
+import System.Drawing
 import ScottPlot;
 var Chart = ScottPlot.FormsPlot();
 //绑定界面
@@ -14,6 +15,10 @@ dotNet.setParent(Chart,mainForm.custom);
 var xs = ScottPlot.DataGen.Consecutive(51);
 var sin = ScottPlot.DataGen.Sin(51);
 var cos = ScottPlot.DataGen.Cos(51);
+
+var arrow2 = Chart.Plot.AddArrow(27, -0.25, 23, -.5);
+arrow2.Color = System.Drawing.Color.Red;
+arrow2.MinimumLengthPixels = 100;
  
 // 2条曲线
 Chart.Plot.AddScatter(xs, sin);

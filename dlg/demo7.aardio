@@ -1,0 +1,43 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import System.Drawing;
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+var plt = Chart.Plot;
+
+var bar1 = plt.AddBar({ 10, 13, 15 }, { 1, 5, 9 });
+bar1.HatchStyle = ScottPlot.Drawing.HatchStyle.StripedUpwardDiagonal;
+bar1.FillColor = System.Drawing.Color.Gray;
+bar1.FillColorHatch = System.Drawing.Color.Black;
+bar1.Label = "Series 1";
+
+var bar2 = plt.AddBar({ 14, 15, 9 }, { 2, 6, 10 });
+bar2.HatchStyle = ScottPlot.Drawing.HatchStyle.StripedWideDownwardDiagonal;
+bar2.FillColor = System.Drawing.Color.DodgerBlue;
+bar2.FillColorHatch = System.Drawing.Color.DeepSkyBlue;
+bar2.Label = "Series 2";
+
+var bar3 = plt.AddBar({ 13, 6, 14 }, { 3, 7, 11 });
+bar3.HatchStyle = ScottPlot.Drawing.HatchStyle.LargeCheckerBoard;
+bar3.FillColor = System.Drawing.Color.SeaGreen;
+bar3.FillColorHatch = System.Drawing.Color.DarkSeaGreen;
+bar3.Label = "Series 3";
+
+// add a legend to display each labeled bar plot
+plt.Legend(true,1/* Alignment.UpperRight*/);
+
+// adjust axis limits so there is no padding below the bar graph
+Chart.Plot.SetAxisLimits(null,null,0,20,0,0);
+ 
+Chart.Refresh(true,false);
+
+mainForm.show();
+return win.loopMessage();

@@ -1,0 +1,32 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+var ys = ScottPlot.DataGen.NoisyLinear(null, 100,1,30, 20);
+var xs = ScottPlot.DataGen.Consecutive(#ys);
+
+var x1 = xs[1];
+var x2 = xs[#xs];
+var arr = ValueTuple.CreateDoubleTupleValue(x1,x2);
+
+// use the linear regression fitter to fit these data
+var model = ScottPlot.Statistics.LinearRegressionLine(xs, ys);
+
+// plot the original data and add the regression line
+Chart.Plot.Title('Linear Regression\n' ++ "Y = "++model.slope++"x + "++model.offset++ " (R² = "++model.rSquared++")");
+Chart.Plot.AddScatter(xs, ys, null, 0);
+Chart.Plot.AddLine(model.slope, model.offset, arr,null, 2);
+
+Chart.Refresh(true,false);
+
+
+mainForm.show();
+return win.loopMessage();

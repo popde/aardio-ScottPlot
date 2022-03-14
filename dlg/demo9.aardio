@@ -1,0 +1,41 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import System.Drawing
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+var plt = Chart.Plot;
+
+var xs = ScottPlot.DataGen.Consecutive(31);
+var ys = ScottPlot.DataGen.Sin(31);
+var colormap = ScottPlot.Drawing.Colormap.Viridis;
+
+var myBubblePlot = plt.AddBubblePlot();
+for (i = 1; #xs; 1)
+{
+    var fraction = i / #xs;
+    myBubblePlot.Add(
+        xs[i],
+        ys[i],
+        10 + i,
+        colormap.GetColor(fraction, alpha: .8),
+        2,
+        System.Drawing.Color.Black
+    );
+    //plt.AddText(tostring(ys[i]), xs[i], ys[i]);
+}
+
+plt.Title("Advanced Bubble Plot");
+plt.AxisAuto(0.2, 0.25); // zoom out to accommodate large bubbles
+ 
+Chart.Refresh(true,false);
+
+mainForm.show();
+return win.loopMessage();

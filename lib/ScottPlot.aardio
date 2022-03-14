@@ -4,10 +4,11 @@ dotNet.reference({
     ["ScottPlot.WinForms"] = $"~\lib\ScottPlot\.res\ScottPlot.WinForms.dll";
     ["ScottPlot"] = $"~\lib\ScottPlot\.res\ScottPlot.dll";
     ["System.ValueTuple"] = $"~\lib\ScottPlot\.res\System.ValueTuple.dll";
+    ["CreateTupleArr.Aardio"] = $"~\lib\ScottPlot\.res\CreateTupleArr.dll";
 })
  
 ScottPlot = dotNet.import("ScottPlot");
-
+ValueTuple = dotNet.import("CreateTupleArr.Aardio");
 var asm = dotNet.load("ScottPlot.WinForms");
 ScottPlot.FormsPlot = asm.import("ScottPlot.FormsPlot");
 
