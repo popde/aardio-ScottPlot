@@ -1,0 +1,37 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import System.Drawing
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+
+var xs = ScottPlot.DataGen.Consecutive(51);
+var sin = ScottPlot.DataGen.Sin(51);
+var cos = ScottPlot.DataGen.Cos(51);
+
+var arrow2 = Chart.Plot.AddArrow(27, -0.25, 23, -.5);
+arrow2.Color = System.Drawing.Color.Red;
+arrow2.MinimumLengthPixels = 100;
+ 
+// 2条曲线
+var sinplot = Chart.Plot.AddScatter(xs, sin);
+var cosplot = Chart.Plot.AddScatter(xs, cos);
+sinplot.LineWidth = 0;
+cosplot.LineWidth = 0; 
+// plot参数设置
+Chart.Plot.Title("aardio调用c# ScottPlot 控件");
+Chart.Plot.XLabel("X轴");
+Chart.Plot.YLabel("Y轴");
+Chart.Plot.AddCrosshair(0.0, 0.0);
+Chart.Refresh(true);
+
+
+mainForm.show();
+return win.loopMessage();

@@ -1,0 +1,37 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import System.Drawing
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+var plt = Chart.Plot;
+
+import gdip.bitmap
+var bitdata = gdip.bitmap($"res\1.png").lockData().bits;
+
+var col = #bitdata.rows;
+var row = #bitdata.rows[1].bytes/4;
+
+var intensities = table.array(col,row,{});
+for ( i = 1; col; 1)
+{
+	for ( j = 1; row; 1)
+	{
+		intensities[i][j] = bitdata.rows[i].bytes[1+(j-1)*4];
+	}
+}
+
+plt.AddHeatmap(intensities);
+
+Chart.Refresh(true);
+
+
+mainForm.show();
+return win.loopMessage();

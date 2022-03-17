@@ -1,0 +1,29 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+var plt = Chart.Plot;
+ 
+var intensities = table.array(100,100,{});
+for ( i = 1; 100; 1)
+{
+    for ( j = 1; 100; 1)
+    {
+        intensities[i][j] = (math.sin(i * 0.2) + math.cos(j * 0.2)) * 100;
+    }
+}
+plt.AddHeatmap(intensities);
+ 
+Chart.Refresh(true);
+
+
+mainForm.show();
+return win.loopMessage();

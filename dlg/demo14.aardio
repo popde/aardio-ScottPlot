@@ -1,0 +1,34 @@
+import win.ui;
+/*DSG{{*/
+var mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
+mainForm.add(
+custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=526;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
+)
+/*}}*/
+
+import System.Drawing
+import ScottPlot;
+var Chart = ScottPlot.FormsPlot();
+//绑定界面
+dotNet.setParent(Chart,mainForm.custom);
+var plt = Chart.Plot;
+
+
+var xs = { 1, 2, 3, 4 };
+var ys1 = { 1, 3, 1, 2 };
+var ys2 = { 3, 7, 3, 1 };
+var ys3 = { 5, 2, 5, 6 };
+
+// plot line data as polygon corners
+var paddedXs = ScottPlot.Tools.Pad(xs, 1,0,0,true);
+plt.AddPolygon(paddedXs, ScottPlot.Tools.Pad(ys3), null,  2, System.Drawing.Color.Black);
+plt.AddPolygon(paddedXs, ScottPlot.Tools.Pad(ys2), null,  2, System.Drawing.Color.Black);
+plt.AddPolygon(paddedXs, ScottPlot.Tools.Pad(ys1), null/*System.Drawing.Color.Green*/,  2, System.Drawing.Color.Black);
+
+plt.AxisAuto(0, 0);
+plt.Title("Filled Line Plots");
+
+Chart.Refresh(false,false);
+
+mainForm.show();
+return win.loopMessage();
