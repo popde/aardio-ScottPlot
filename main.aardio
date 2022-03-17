@@ -2,16 +2,25 @@ import win.ui;
 /*DSG{{*/
 mainForm = win.form(text="ScottPlot_Demo";right=823;bottom=525)
 mainForm.add(
-button={cls="button";text="demo1";left=4;top=489;right=67;bottom=525;db=1;dl=1;z=2};
-button10={cls="button";text="demo10";left=634;top=489;right=697;bottom=525;db=1;dr=1;z=11};
-button2={cls="button";text="demo2";left=74;top=489;right=137;bottom=525;db=1;dl=1;z=3};
-button3={cls="button";text="demo3";left=144;top=489;right=207;bottom=525;db=1;dl=1;z=4};
-button4={cls="button";text="demo4";left=214;top=489;right=277;bottom=525;db=1;dl=1;z=5};
-button5={cls="button";text="demo5";left=284;top=489;right=347;bottom=525;db=1;dl=1;z=6};
-button6={cls="button";text="demo6";left=354;top=489;right=417;bottom=525;db=1;dl=1;dr=1;z=7};
-button7={cls="button";text="demo7";left=424;top=489;right=487;bottom=525;db=1;dr=1;z=8};
-button8={cls="button";text="demo8";left=494;top=489;right=557;bottom=525;db=1;dr=1;z=9};
-button9={cls="button";text="demo9";left=564;top=489;right=627;bottom=525;db=1;dr=1;z=10};
+button1={cls="button";text="1";left=4;top=489;right=34;bottom=525;db=1;dl=1;z=2};
+button10={cls="button";text="10";left=344;top=489;right=374;bottom=525;db=1;dl=1;z=11};
+button11={cls="button";text="11";left=382;top=489;right=412;bottom=525;db=1;dl=1;z=13};
+button12={cls="button";text="12";left=420;top=489;right=450;bottom=525;db=1;dr=1;z=14};
+button13={cls="button";text="13";left=457;top=489;right=487;bottom=525;db=1;dr=1;z=15};
+button14={cls="button";text="14";left=495;top=489;right=525;bottom=525;db=1;dr=1;z=16};
+button15={cls="button";text="15";left=533;top=489;right=563;bottom=525;db=1;dr=1;z=17};
+button16={cls="button";text="16";left=571;top=489;right=601;bottom=525;db=1;dr=1;z=18};
+button17={cls="button";text="17";left=608;top=489;right=638;bottom=525;db=1;dr=1;z=19};
+button18={cls="button";text="18";left=646;top=489;right=676;bottom=525;db=1;dr=1;z=20};
+button19={cls="button";text="19";left=684;top=489;right=714;bottom=525;db=1;dr=1;z=12};
+button2={cls="button";text="2";left=42;top=489;right=72;bottom=525;db=1;dl=1;z=3};
+button3={cls="button";text="3";left=80;top=489;right=110;bottom=525;db=1;dl=1;z=4};
+button4={cls="button";text="4";left=117;top=489;right=147;bottom=525;db=1;dl=1;z=5};
+button5={cls="button";text="5";left=155;top=489;right=185;bottom=525;db=1;dl=1;z=6};
+button6={cls="button";text="6";left=193;top=489;right=223;bottom=525;db=1;dl=1;z=7};
+button7={cls="button";text="7";left=231;top=489;right=261;bottom=525;db=1;dl=1;z=8};
+button8={cls="button";text="8";left=268;top=489;right=298;bottom=525;db=1;dl=1;z=9};
+button9={cls="button";text="9";left=306;top=489;right=336;bottom=525;db=1;dl=1;z=10};
 custom={cls="custom";text="自定义控件";left=0;top=0;right=824;bottom=485;bgcolor=12639424;db=1;dl=1;dr=1;dt=1;z=1}
 )
 /*}}*/
@@ -38,61 +47,19 @@ Chart.Plot.AddLine(model.slope, model.offset, arr,null, 2);
  
 Chart.Refresh(true,false);
 
-mainForm.button.oncommand = function(id,event){
-	
-var frmChild = mainForm.loadForm("\dlg\demo1.aardio");
-frmChild.show();
-
+run = function(text){
+	if(text!="" or text!=null){
+		var frmChild = mainForm.loadForm("\dlg\demo"++text++".aardio");
+		frmChild.show();
+	}	
 }
 
-mainForm.button2.oncommand = function(id,event){
-	
-var frmChild = mainForm.loadForm("\dlg\demo2.aardio");
-frmChild.show();
-
+for(i=1;19;1){
+	mainForm["button"++i].oncommand = function(id,event){
+		run(i);
+	};
 }
 
-mainForm.button3.oncommand = function(id,event){
-	
-var frmChild = mainForm.loadForm("\dlg\demo3.aardio");
-frmChild.show();
-
-}
-
-mainForm.button4.oncommand = function(id,event){
-	var frmChild = mainForm.loadForm("\dlg\demo4.aardio");
-	frmChild.show();
-}
-
-mainForm.button5.oncommand = function(id,event){
-	var frmChild = mainForm.loadForm("\dlg\demo5.aardio");
-	frmChild.show();
-}
-
-mainForm.button6.oncommand = function(id,event){
-	var frmChild = mainForm.loadForm("\dlg\demo6.aardio");
-	frmChild.show();
-}
-
-mainForm.button7.oncommand = function(id,event){
-	var frmChild = mainForm.loadForm("\dlg\demo7.aardio");
-	frmChild.show();
-}
-
-mainForm.button8.oncommand = function(id,event){
-	var frmChild = mainForm.loadForm("\dlg\demo8.aardio");
-	frmChild.show();
-}
-
-mainForm.button9.oncommand = function(id,event){
-	var frmChild = mainForm.loadForm("\dlg\demo9.aardio");
-	frmChild.show();
-}
-
-mainForm.button10.oncommand = function(id,event){
-	var frmChild = mainForm.loadForm("\dlg\demo10.aardio");
-	frmChild.show();
-}
 
 mainForm.show();
 return win.loopMessage();
